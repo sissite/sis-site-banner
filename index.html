@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Campus Carousel</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .carousel {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      width: 100%;
+      line-height: 0;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 0;
+    }
+
+    .button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      line-height: 1.2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: 0.3s;
+      z-index: 2;
+      min-width: 420px;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .button-purple {
+      background: #9186d0;
+    }
+
+    .button-orange {
+      background: #ff914d;
+    }
+
+    .button-green {
+      background: #7ac943;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.35);
+      color: white;
+      border: none;
+      font-size: 28px;
+      padding: 10px 14px;
+      cursor: pointer;
+      z-index: 3;
+      border-radius: 50%;
+    }
+
+    .arrow:hover {
+      background: rgba(0,0,0,0.6);
+    }
+
+    .prev {
+      left: 15px;
+    }
+
+    .next {
+      right: 15px;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 8px;
+      width: 100%;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .dot {
+      height: 10px;
+      width: 10px;
+      margin: 0 4px;
+      background-color: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="carousel">
+
+    <!-- SLIDE 1 : TECH EXPO -->
+    <div class="slide active">
+      <img src="tech-expo.png" alt="Tech Expo 2026">
+
+      <a
+        class="button button-purple"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSc4Sn4Vw3P4eqSyv541xeHEvpAyihbVRTtI12jyTWHKIJh9Yg/viewform"
+        target="_blank"
+      >
+        Click to Register for Tech Expo '26!
+      </a>
+    </div>
+
+    <!-- SLIDE 2 : SUMMER WORKSHOPS -->
+    <div class="slide">
+      <img src="summer-workshops.png" alt="Summer 2026 Workshops">
+
+      <a
+        class="button button-orange"
+        href="https://docs.google.com/forms/d/e/1FAIpQLScRr0WtAIMaX7bC7bXeyUiGjNHIj8DJwKoc8cUbCY5XdOKeEg/viewform?usp=dialog"
+        target="_blank"
+      >
+        Click to Register for our Summer Workshops!
+      </a>
+    </div>
+
+    <!-- SLIDE 3 : USER GROUPS -->
+    <div class="slide">
+      <img src="user-groups.png" alt="User Groups">
+
+      <a
+        class="button button-green"
+        href="https://your-link-here.com"
+        target="_blank"
+      >
+        Click to Learn About User Groups!
+      </a>
+    </div>
+
+    <button class="arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="arrow next" onclick="changeSlide(1)">&#10095;</button>
+
+    <div class="dots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove("active"));
+      dots.forEach(dot => dot.classList.remove("active"));
+
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides[currentSlide].classList.add("active");
+      dots[currentSlide].classList.add("active");
+    }
+
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+    }
+
+    setInterval(() => {
+      changeSlide(1);
+    }, 5000);
+  </script>
+
+</body>
+</html>
